@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    /* Web3 Brand Colors (values in R G B) */
+    --primary: 99 102 241;
+    --primary-dark: 79 70 229;
+    --primary-light: 129 140 248;
+
+    /* Gradient Accents */
+    --gradient-start: #8B5CF6;
+    --gradient-mid: #6366F1;
+    --gradient-end: #3B82F6;
+
+    /* Background Colors */
+    --bg-primary: 15 23 42;
+    --bg-secondary: 30 41 59;
+    --bg-tertiary: 51 65 85;
+    --bg-overlay: rgba(15, 23, 42, 0.95);
+
+    /* Surface Colors */
+    --surface-01: 15 23 42;
+    --surface-02: 30 41 59;
+    --surface-03: 51 65 85;
+
+    /* Text Colors */
+    --text-primary: 241 245 249;
+    --text-secondary: 148 163 184;
+    --text-tertiary: 100 116 139;
+    --text-accent: 96 165 250;
+
+    /* Status Colors */
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --info: 59 130 246;
+
+    /* Border & Divider */
+    --border-light: rgba(148, 163, 184, 0.2);
+    --border-medium: rgba(148, 163, 184, 0.3);
+    --border-heavy: rgba(148, 163, 184, 0.4);
+
+    /* Special Effects */
+    --glow: 0 0 20px rgba(99, 102, 241, 0.3);
+    --glow-strong: 0 0 30px rgba(99, 102, 241, 0.5);
+    --neon-glow: 0 0 10px #60A5FA, 0 0 20px #3B82F6;
+
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'SF Mono', 'Roboto Mono', monospace;
+    --blur-effect: saturate(180%) blur(20px);
+}
+
+.macos {
+    --bg-primary: 10 15 28;
+    --bg-secondary: 26 34 56;
+    --surface-01: rgba(10, 15, 28, 0.8);
+}
+
+.windows {
+    --bg-primary: 17 24 39;
+    --bg-secondary: 31 41 55;
+}
+
+.linux {
+    --bg-primary: 15 23 42;
+    --bg-secondary: 30 41 59;
+}
+
+@layer base {
+    body {
+        background-color: rgb(var(--bg-primary));
+        color: rgb(var(--text-primary));
+        @apply font-sans ;
+        height: 100vh;
+        width: 100vw;
+    }
+}
+
+@layer components {
+    .title-bar {
+        background: linear-gradient(90deg,
+                rgb(var(--bg-primary)),
+                rgb(var(--bg-secondary)));
+        backdrop-filter: var(--blur-effect);
+        border-bottom: 1px solid rgba(var(--text-secondary), 0.2);
+        -webkit-app-region: drag;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 12px;
+        z-index: 1000;
+    }
+
+    .title-bar-controls {
+        -webkit-app-region: no-drag;
+        display: flex;
+        gap: 8px;
+    }
+
+    .wallet-btn {
+        @apply flex items-center justify-center gap-3 px-6 py-3 rounded-xl font-semibold transition-all duration-300;
+    }
+
+    .wallet-btn.metamask {
+        background: linear-gradient(135deg, #F6851B 0%, #E2761B 100%);
+        border: 1px solid rgba(246, 133, 27, 0.3);
+        box-shadow: var(--glow);
+    }
+
+    .wallet-btn.walletconnect {
+        background: linear-gradient(135deg, #3B99FC 0%, #2A6FDB 100%);
+        border: 1px solid rgba(59, 153, 252, 0.3);
+    }
+
+    .wallet-btn.coinbase {
+        background: linear-gradient(135deg, #1652F0 0%, #0D41C1 100%);
+        border: 1px solid rgba(22, 82, 240, 0.3);
+    }
+
+    .wallet-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--glow-strong);
+        border-color: var(--primary-light);
+    }
+
+    .input-field {
+        background-color: rgba(30, 41 ,59, 0.7);
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        color: rgb(241, 245, 249);
+        @apply w-full rounded-lg px-4 py-2 outline-none transition-all duration-200;
+    }
+
+    .input-field:focus {
+        background-color: rgba(30, 41, 59, 0.9);
+        border-color: rgb(var(--primary));
+        box-shadow: 0 0 0 3px rgba(var(--primary), 0.1);
+    }
+
+    .testimonial-card {
+        background: linear-gradient(145deg,
+                rgba(99, 102, 241, 0.1),
+                rgba(30, 41, 59, 0.3));
+        border: 1px solid rgba(99, 102, 241, 0.2);
+        border-radius: 12px;
+        backdrop-filter: blur(10px);
+        @apply p-4;
+    }
+
+    .notification {
+        @apply p-4 rounded-lg flex items-center gap-3 mb-2 transition-all duration-300;
+    }
+
+    .notification.success {
+        background: linear-gradient(135deg,
+                rgba(16, 185, 129, 0.15),
+                rgba(16, 185, 129, 0.05));
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        border-left: 4px solid var(--success);
+    }
+
+    .reputation-score {
+        background: linear-gradient(135deg,
+                var(--gradient-start),
+                var(--gradient-mid),
+                var(--gradient-end));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-weight: bold;
+        text-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: var(--glow);
+    }
+
+    50% {
+        box-shadow: var(--glow-strong);
+    }
+}
+
+.animate-shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.animate-shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(99, 102, 241, 0.1),
+            transparent);
+    animation: shimmer 2s infinite;
+}
+
+.scrollable {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(148, 163, 184, 0.3) rgb(var(--bg-secondary));
+}
+.scrollable::-webkit-scrollbar { width: 6px; height: 6px; }
+.scrollable::-webkit-scrollbar-track { background: rgb(var(--bg-secondary)); border-radius: 10px; }
+.scrollable::-webkit-scrollbar-thumb { background-color: rgb(var(--primary)); border-radius: 10px; border: 2px solid rgb(var(--bg-secondary)); }
+.scrollable::-webkit-scrollbar-thumb:hover { background-color: rgb(var(--primary-light)); }
+
+
+/* Hide scrollbar globally for elements with .hide-scrollbar */
+.hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari, Opera */
+}
